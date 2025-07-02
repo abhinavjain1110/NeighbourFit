@@ -29,7 +29,7 @@ export default function Register() {
 
   return (
     <Box maxWidth={400} mx="auto" mt={8} p={3} boxShadow={2} borderRadius={2} bgcolor={theme.palette.background.paper} color={theme.palette.text.primary}>
-      <Typography variant="h5" mb={2}>Register for NeighborFit</Typography>
+      <Typography variant="h5" mb={2}>Register for NeighbourFit</Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
       <form onSubmit={handleSubmit}>

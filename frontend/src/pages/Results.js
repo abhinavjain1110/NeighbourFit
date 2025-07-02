@@ -10,7 +10,23 @@ function Results({ token }) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [page, setPage] = useState(1);
   const theme = useTheme();
+
+  // Calculate total score from preferences (same as backend)
+  const totalScore = preferences
+    ? (preferences.safety || 0) * (preferences.safety || 0)
+      + (preferences.affordability || 0) * (preferences.affordability || 0)
+      + (preferences.amenities || 0) * (preferences.amenities || 0)
+      + (preferences.walkability || 0) * (preferences.walkability || 0)
+      + (preferences.schools || 0) * (preferences.schools || 0)
+    : 0;
+
+  // Filter results by score > totalScore
+  const filteredResults = results.filter((n) => n.score > totalScore);
+  const resultsPerPage = 15;
+  const pageCount = Math.ceil(filteredResults.length / resultsPerPage);
+  const paginatedResults = filteredResults.slice((page - 1) * resultsPerPage, page * resultsPerPage);
 
   useEffect(() => {
     if (!preferences) {
@@ -46,20 +62,20 @@ function Results({ token }) {
   return (
     <Container maxWidth="md" sx={{ bgcolor: theme.palette.background.paper, borderRadius: 3, boxShadow: 3, mt: 6, p: 3 }}>
       <Box mt={2}>
-        <Typography variant="h4" mb={2} color="primary" sx={{ fontWeight: 700 }}>Neighborhood Results</Typography>
+        <Typography variant="h4" mb={2} color="primary" sx={{ fontWeight: 700 }}>Neighbourhood Results</Typography>
         {loading && <CircularProgress />}
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-        {!loading && results.length === 0 && <Typography>No results found.</Typography>}
+        {!loading && paginatedResults.length === 0 && <Typography>No results found.</Typography>}
         <List>
-          {results.map((n) => (
+          {paginatedResults.map((n) => (
             <Card key={n._id} sx={{ mb: 3, background: theme.palette.background.default, boxShadow: 3, color: theme.palette.text.primary }}>
               {n.image && (
                 <CardMedia
                   component="img"
-                  height="180"
+                  height="250"
                   image={n.image}
                   alt={n.name}
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "scale-down" }}
                 />
               )}
               <CardContent>
@@ -77,7 +93,26 @@ function Results({ token }) {
             </Card>
           ))}
         </List>
-        <Button variant="contained" color="primary" onClick={() => navigate('/preferences')}>Back to Preferences</Button>
+        <Box display="flex" justifyContent="center" alignItems="center" mt={2} gap={2}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            disabled={page === 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            Previous
+          </Button>
+          <Typography variant="body2">Page {page} of {pageCount}</Typography>
+          <Button
+            variant="outlined"
+            color="secondary"
+            disabled={page === pageCount || pageCount === 0}
+            onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+          >
+            Next
+          </Button>
+        </Box>
+        <Button variant="contained" color="primary" onClick={() => navigate('/preferences')} sx={{ mt: 2 }}>Back to Preferences</Button>
       </Box>
     </Container>
   );

@@ -23,9 +23,12 @@ const defaultPrefs = {
   schools: 5,
 };
 
+const defaultMinScore = 0;
+
 function Preferences({ token }) {
   const [preferences, setPreferences] = useState(defaultPrefs);
   const [activeStep, setActiveStep] = useState(0);
+  const [minScore, setMinScore] = useState(defaultMinScore);
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -37,7 +40,7 @@ function Preferences({ token }) {
     if (activeStep < preferenceFields.length - 1) {
       setActiveStep((prev) => prev + 1);
     } else {
-      navigate('/results', { state: { preferences } });
+      navigate('/results', { state: { preferences, minScore } });
     }
   };
 
@@ -72,6 +75,21 @@ function Preferences({ token }) {
           marks
           sx={{ color: theme.palette.primary.main, mb: 4 }}
         />
+        {/* {activeStep === preferenceFields.length - 1 && (
+          <Box mb={4}>
+            <Typography variant="subtitle1" mb={1} color="secondary">Minimum Score for Results: {minScore}</Typography>
+            <Slider
+              value={minScore}
+              min={0}
+              max={50}
+              step={1}
+              onChange={(_, value) => setMinScore(value)}
+              valueLabelDisplay="auto"
+              marks
+              sx={{ color: theme.palette.secondary.main }}
+            />
+          </Box>
+        )} */}
         <Box display="flex" justifyContent="space-between">
           <Button disabled={activeStep === 0} onClick={handleBack} variant="outlined" color="secondary">Back</Button>
           <Button onClick={handleNext} variant="contained" color="primary">

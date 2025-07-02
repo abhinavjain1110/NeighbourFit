@@ -1,94 +1,46 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-# NeighborFit Frontend
+# NeighbourFit Frontend
 
 ## Overview
-React app for user input and displaying matched neighborhoods.
+NeighbourFit is a modern React app that helps you find the perfect neighbourhood in Mumbai based on your lifestyle and preferences. With a beautiful dark theme and a user-friendly interface, you can easily set your priorities for safety, affordability, amenities, walkability, and schools, and get personalized matches for your next home.
 
 ## Features
-- User preference form (sliders)
-- Results list with neighborhood details
-- Preferences are managed locally in the browser and are not stored in MongoDB
-- Neighborhood results update live as you adjust your preferences (no save/submit needed)
-- The app is a multi-page React application: Home, Preferences, Results, Login, Register
+- 🌃 **Mumbai Focus**: Discover the best neighbourhoods in Mumbai tailored to your needs.
+- 🎨 **Modern Dark Theme**: Enjoy a visually appealing, accessible interface with a premium look.
+- 🏠 **Personalized Matching**: Set your preferences and see only the most relevant neighbourhoods.
+- 📊 **Detailed Results**: Compare safety, affordability, amenities, walkability, and schools for each neighbourhood.
+- 🔍 **Smart Filtering**: Only see neighbourhoods with a score higher than your calculated preference score.
+- 📄 **Pagination**: Results are paginated (15 per page) for easy browsing.
+- 👤 **Authentication**: Register and log in to save your preferences.
+- 📝 **Multi-Page App**: Home, Preferences, Results, Login, Register.
+
+## Home Page
+The home page features a Mumbai-themed hero section, a bold headline, and a feature list explaining how NeighbourFit helps you find your ideal home in Mumbai.
 
 ## How to Run
-```
+```bash
 cd frontend
 npm install
 npm start
 ```
-
-App runs on `http://localhost:3000` by default.
+App runs on [http://localhost:3000](http://localhost:3000) by default.
 
 ## API Usage
-- Connects to backend at `http://localhost:3001`
+- Connects to backend at [http://localhost:3001](http://localhost:3001)
+- Uses `/api/match` to get ranked neighbourhoods based on your preferences
+
+## Project Structure
+- `src/pages/Preferences.js`: User sets preferences for Mumbai neighbourhoods
+- `src/pages/Results.js`: Shows paginated, filtered results with detailed info
+- `src/pages/Login.js` & `src/pages/Register.js`: User authentication
+- `src/App.js`: Main app, navigation, and beautiful home page
+
+## Tech Stack
+- React + Material UI (MUI)
+- Modern CSS for dark theme
+- Axios for API requests
+
+## Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+[MIT](../LICENSE)
