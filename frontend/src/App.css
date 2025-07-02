@@ -1,21 +1,22 @@
 body {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  background: linear-gradient(135deg, #181c24 0%, #232837 100%);
   min-height: 100vh;
   font-family: 'Segoe UI', Arial, sans-serif;
+  color: #f5f6fa;
 }
 
 .App {
   max-width: 700px;
   margin: 40px auto;
-  background: rgba(255,255,255,0.95);
+  background: rgba(35,40,55,0.98);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
   padding: 32px 24px;
 }
 
 h1, h2, h3, h4, h5 {
-  color: #5f2c82;
-  background: linear-gradient(90deg, #49a09d 0%, #5f2c82 100%);
+  color: #fed6e3;
+  background: linear-gradient(90deg, #49a09d 0%, #fed6e3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -37,6 +38,7 @@ h1, h2, h3, h4, h5 {
 label {
   min-width: 110px;
   font-weight: 500;
+  color: #fed6e3;
 }
 
 input[type="range"] {
@@ -45,18 +47,19 @@ input[type="range"] {
 }
 
 button[type="submit"], .MuiButton-containedPrimary {
-  background: linear-gradient(90deg, #49a09d 0%, #5f2c82 100%);
-  color: #fff;
+  background: linear-gradient(90deg, #49a09d 0%, #fed6e3 100%);
+  color: #181c24;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
-  box-shadow: 0 2px 8px rgba(95,44,130,0.08);
+  box-shadow: 0 2px 8px rgba(73,160,157,0.18);
 }
 button[disabled], .MuiButton-containedPrimary:disabled {
-  background: #b7e4c7;
+  background: #232837;
+  color: #b2becd;
   cursor: not-allowed;
 }
 
@@ -66,16 +69,16 @@ button[disabled], .MuiButton-containedPrimary:disabled {
 }
 
 .result-item {
-  background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+  background: linear-gradient(90deg, #232837 0%, #181c24 100%);
   border-radius: 12px;
   margin-bottom: 18px;
   padding: 16px 18px;
-  box-shadow: 0 1px 6px rgba(95,44,130,0.06);
+  box-shadow: 0 1px 6px rgba(73,160,157,0.10);
 }
 
 .result-item h3, .result-item .MuiTypography-h6 {
   margin: 0 0 6px 0;
-  color: #5f2c82;
+  color: #fed6e3;
 }
 
 .result-item ul {
@@ -84,8 +87,8 @@ button[disabled], .MuiButton-containedPrimary:disabled {
 }
 
 .MuiAppBar-root {
-  background: linear-gradient(90deg, #49a09d 0%, #5f2c82 100%);
-  box-shadow: 0 2px 8px rgba(95,44,130,0.08);
+  background: linear-gradient(90deg, #232837 0%, #49a09d 100%);
+  box-shadow: 0 2px 8px rgba(73,160,157,0.08);
 }
 
 .App-logo {
@@ -100,18 +103,18 @@ button[disabled], .MuiButton-containedPrimary:disabled {
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #181c24;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #f5f6fa;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #49a09d;
 }
 
 @keyframes App-logo-spin {

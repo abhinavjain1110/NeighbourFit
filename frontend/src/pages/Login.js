@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, Link, Alert } from '@mui/material';
+import { Box, Button, TextField, Typography, Link, Alert, useTheme } from '@mui/material';
 import axios from 'axios';
 
 export default function Login({ onLogin }) {
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -25,7 +26,7 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <Box maxWidth={400} mx="auto" mt={8} p={3} boxShadow={2} borderRadius={2} bgcolor="#fff">
+    <Box maxWidth={400} mx="auto" mt={8} p={3} boxShadow={2} borderRadius={2} bgcolor={theme.palette.background.paper} color={theme.palette.text.primary}>
       <Typography variant="h5" mb={2}>Login to NeighborFit</Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       <form onSubmit={handleSubmit}>
@@ -61,7 +62,7 @@ export default function Login({ onLogin }) {
       </form>
       <Typography mt={2}>
         Don't have an account?{' '}
-        <Link href="/register">Register</Link>
+        <Link href="/register" color="secondary">Register</Link>
       </Typography>
     </Box>
   );

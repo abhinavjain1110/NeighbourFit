@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Box, Typography, Container, CircularProgress, Alert, Card, CardContent, CardMedia, List, ListItem, ListItemText, Button } from '@mui/material';
+import { Box, Typography, Container, CircularProgress, Alert, Card, CardContent, CardMedia, List, ListItem, ListItemText, Button, useTheme } from '@mui/material';
 import axios from 'axios';
 
 function Results({ token }) {
@@ -10,6 +10,7 @@ function Results({ token }) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const theme = useTheme();
 
   useEffect(() => {
     if (!preferences) {
@@ -43,15 +44,15 @@ function Results({ token }) {
   }, [preferences, token, navigate]);
 
   return (
-    <Container maxWidth="md">
-      <Box mt={4}>
-        <Typography variant="h4" mb={2} color="primary">Neighborhood Results</Typography>
+    <Container maxWidth="md" sx={{ bgcolor: theme.palette.background.paper, borderRadius: 3, boxShadow: 3, mt: 6, p: 3 }}>
+      <Box mt={2}>
+        <Typography variant="h4" mb={2} color="primary" sx={{ fontWeight: 700 }}>Neighborhood Results</Typography>
         {loading && <CircularProgress />}
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
         {!loading && results.length === 0 && <Typography>No results found.</Typography>}
         <List>
           {results.map((n) => (
-            <Card key={n._id} sx={{ mb: 3, background: '#f5faff', boxShadow: 3 }}>
+            <Card key={n._id} sx={{ mb: 3, background: theme.palette.background.default, boxShadow: 3, color: theme.palette.text.primary }}>
               {n.image && (
                 <CardMedia
                   component="img"

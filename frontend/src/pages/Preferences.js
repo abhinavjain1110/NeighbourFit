@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Container, Slider, Button, Stepper, Step, StepLabel, Avatar } from '@mui/material';
+import { Box, Typography, Container, Slider, Button, Stepper, Step, StepLabel, Avatar, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SecurityIcon from '@mui/icons-material/Security';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -27,6 +27,7 @@ function Preferences({ token }) {
   const [preferences, setPreferences] = useState(defaultPrefs);
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleChange = (key) => (e, value) => {
     setPreferences((prev) => ({ ...prev, [key]: value }));
@@ -47,18 +48,18 @@ function Preferences({ token }) {
   const { key, label, icon } = preferenceFields[activeStep];
 
   return (
-    <Container maxWidth="sm">
-      <Box mt={4}>
-        <Typography variant="h4" mb={2} color="primary">Tell Us Your Preferences</Typography>
-        <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
+    <Container maxWidth="sm" sx={{ bgcolor: theme.palette.background.paper, borderRadius: 3, boxShadow: 3, mt: 6, p: 3 }}>
+      <Box mt={2}>
+        <Typography variant="h4" mb={2} color="primary" sx={{ fontWeight: 700 }}>Tell Us Your Preferences</Typography>
+        <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4, background: 'transparent', p: 1 }}>
           {preferenceFields.map((field) => (
             <Step key={field.key}>
-              <StepLabel icon={<Avatar sx={{ bgcolor: '#1976d2' }}>{field.icon}</Avatar>}>{field.label}</StepLabel>
+              <StepLabel icon={<Avatar sx={{ bgcolor: theme.palette.primary.main }}>{field.icon}</Avatar>}>{field.label}</StepLabel>
             </Step>
           ))}
         </Stepper>
         <Box textAlign="center" mb={2}>
-          <Avatar sx={{ bgcolor: '#1976d2', width: 56, height: 56, margin: '0 auto' }}>{icon}</Avatar>
+          <Avatar sx={{ bgcolor: theme.palette.primary.main, width: 56, height: 56, margin: '0 auto' }}>{icon}</Avatar>
           <Typography variant="h6" mt={2}>{label}: {preferences[key]}</Typography>
         </Box>
         <Slider
@@ -69,10 +70,10 @@ function Preferences({ token }) {
           onChange={handleChange(key)}
           valueLabelDisplay="auto"
           marks
-          sx={{ color: '#1976d2', mb: 4 }}
+          sx={{ color: theme.palette.primary.main, mb: 4 }}
         />
         <Box display="flex" justifyContent="space-between">
-          <Button disabled={activeStep === 0} onClick={handleBack} variant="outlined">Back</Button>
+          <Button disabled={activeStep === 0} onClick={handleBack} variant="outlined" color="secondary">Back</Button>
           <Button onClick={handleNext} variant="contained" color="primary">
             {activeStep === preferenceFields.length - 1 ? 'See Results' : 'Next'}
           </Button>

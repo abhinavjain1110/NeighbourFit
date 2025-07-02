@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, Link, Alert } from '@mui/material';
+import { Box, Button, TextField, Typography, Link, Alert, useTheme } from '@mui/material';
 import axios from 'axios';
 
 export default function Register() {
@@ -7,6 +7,7 @@ export default function Register() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,7 +28,7 @@ export default function Register() {
   };
 
   return (
-    <Box maxWidth={400} mx="auto" mt={8} p={3} boxShadow={2} borderRadius={2} bgcolor="#fff">
+    <Box maxWidth={400} mx="auto" mt={8} p={3} boxShadow={2} borderRadius={2} bgcolor={theme.palette.background.paper} color={theme.palette.text.primary}>
       <Typography variant="h5" mb={2}>Register for NeighborFit</Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
@@ -64,7 +65,7 @@ export default function Register() {
       </form>
       <Typography mt={2}>
         Already have an account?{' '}
-        <Link href="/login">Login</Link>
+        <Link href="/login" color="secondary">Login</Link>
       </Typography>
     </Box>
   );
