@@ -52,15 +52,26 @@ function authMiddleware(req, res, next) {
 }
 
 // Get all neighborhoods (public)
-app.get('/api/neighborhoods', (req, res) => {
-  res.json(getAllNeighborhoods());
+// Get all neighborhoods (public)
+app.get('/api/neighborhoods', async (req, res) => {
+  try {
+    const neighborhoods = await getAllNeighborhoods();
+    res.json(neighborhoods);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to fetch neighborhoods' });
+  }
 });
 
 // Match neighborhoods (protected)
-app.post('/api/match', authMiddleware, (req, res) => {
-  const preferences = req.body;
-  const results = matchNeighborhoods(preferences);
-  res.json(results);
+app.post('/api/match', authMiddleware, async (req, res) => {
+  try {
+    const preferences = req.body;
+    const results = await matchNeighborhoods(preferences); // ✅ add await
+    res.json(results);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to match neighborhoods' });
+  }
 });
+
 
 app.listen(3001, () => console.log('API running on port 3001')); 

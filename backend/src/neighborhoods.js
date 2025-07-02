@@ -1,43 +1,24 @@
-// Mock neighborhood data for MVP
-const neighborhoods = [
-  {
-    id: 1,
-    name: 'Greenwood',
-    safety: 8,
-    affordability: 7,
-    amenities: 9,
-    walkability: 8,
-    schools: 7,
-    description: 'A vibrant, family-friendly neighborhood with parks and cafes.'
-  },
-  {
-    id: 2,
-    name: 'Lakeview',
-    safety: 6,
-    affordability: 9,
-    amenities: 6,
-    walkability: 7,
-    schools: 6,
-    description: 'Affordable area with good transit and growing amenities.'
-  },
-  {
-    id: 3,
-    name: 'Downtown',
-    safety: 5,
-    affordability: 4,
-    amenities: 10,
-    walkability: 10,
-    schools: 5,
-    description: 'Urban core with nightlife, restaurants, and high walkability.'
-  }
-];
+const mongoose = require('mongoose');
 
-function getAllNeighborhoods() {
-  return neighborhoods;
+const neighborhoodSchema = new mongoose.Schema({
+  name: String,
+  safety: Number,
+  affordability: Number,
+  amenities: Number,
+  walkability: Number,
+  schools: Number,
+  description: String,
+  image: String // URL or path to image
+});
+
+const Neighborhood = mongoose.model('Neighborhood', neighborhoodSchema);
+
+async function getAllNeighborhoods() {
+  return await Neighborhood.find();
 }
 
-function matchNeighborhoods(preferences) {
-  // Simple weighted scoring for MVP
+async function matchNeighborhoods(preferences) {
+  const neighborhoods = await Neighborhood.find();
   return neighborhoods
     .map(n => {
       let score = 0;
@@ -46,9 +27,9 @@ function matchNeighborhoods(preferences) {
       score += (preferences.amenities || 0) * n.amenities;
       score += (preferences.walkability || 0) * n.walkability;
       score += (preferences.schools || 0) * n.schools;
-      return { ...n, score };
+      return { ...n.toObject(), score };
     })
     .sort((a, b) => b.score - a.score);
 }
 
-module.exports = { getAllNeighborhoods, matchNeighborhoods }; 
+module.exports = { Neighborhood, getAllNeighborhoods, matchNeighborhoods }; 

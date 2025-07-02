@@ -1,0 +1,85 @@
+import React, { useState } from 'react';
+import { Box, Typography, Container, Slider, Button, Stepper, Step, StepLabel, Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import SecurityIcon from '@mui/icons-material/Security';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
+import SchoolIcon from '@mui/icons-material/School';
+
+const preferenceFields = [
+  { key: 'safety', label: 'Safety', icon: <SecurityIcon /> },
+  { key: 'affordability', label: 'Affordability', icon: <AttachMoneyIcon /> },
+  { key: 'amenities', label: 'Amenities', icon: <LocalCafeIcon /> },
+  { key: 'walkability', label: 'Walkability', icon: <DirectionsWalkIcon /> },
+  { key: 'schools', label: 'Schools', icon: <SchoolIcon /> },
+];
+
+const defaultPrefs = {
+  safety: 5,
+  affordability: 5,
+  amenities: 5,
+  walkability: 5,
+  schools: 5,
+};
+
+function Preferences({ token }) {
+  const [preferences, setPreferences] = useState(defaultPrefs);
+  const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate();
+
+  const handleChange = (key) => (e, value) => {
+    setPreferences((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleNext = () => {
+    if (activeStep < preferenceFields.length - 1) {
+      setActiveStep((prev) => prev + 1);
+    } else {
+      navigate('/results', { state: { preferences } });
+    }
+  };
+
+  const handleBack = () => {
+    if (activeStep > 0) setActiveStep((prev) => prev - 1);
+  };
+
+  const { key, label, icon } = preferenceFields[activeStep];
+
+  return (
+    <Container maxWidth="sm">
+      <Box mt={4}>
+        <Typography variant="h4" mb={2} color="primary">Tell Us Your Preferences</Typography>
+        <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
+          {preferenceFields.map((field) => (
+            <Step key={field.key}>
+              <StepLabel icon={<Avatar sx={{ bgcolor: '#1976d2' }}>{field.icon}</Avatar>}>{field.label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <Box textAlign="center" mb={2}>
+          <Avatar sx={{ bgcolor: '#1976d2', width: 56, height: 56, margin: '0 auto' }}>{icon}</Avatar>
+          <Typography variant="h6" mt={2}>{label}: {preferences[key]}</Typography>
+        </Box>
+        <Slider
+          value={preferences[key]}
+          min={0}
+          max={10}
+          step={1}
+          onChange={handleChange(key)}
+          valueLabelDisplay="auto"
+          marks
+          sx={{ color: '#1976d2', mb: 4 }}
+        />
+        <Box display="flex" justifyContent="space-between">
+          <Button disabled={activeStep === 0} onClick={handleBack} variant="outlined">Back</Button>
+          <Button onClick={handleNext} variant="contained" color="primary">
+            {activeStep === preferenceFields.length - 1 ? 'See Results' : 'Next'}
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+  );
+}
+
+export default Preferences; 

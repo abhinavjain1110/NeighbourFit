@@ -77,6 +77,9 @@ React app for user input and displaying matched neighborhoods.
 ## Features
 - User preference form (sliders)
 - Results list with neighborhood details
+- Preferences are managed locally in the browser and are not stored in MongoDB
+- Neighborhood results update live as you adjust your preferences (no save/submit needed)
+- The app is a multi-page React application: Home, Preferences, Results, Login, Register
 
 ## How to Run
 ```
