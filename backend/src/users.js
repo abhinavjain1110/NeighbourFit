@@ -1,23 +1,28 @@
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
-// In-memory user store (replace with DB in production)
-const users = [];
+const userSchema = new mongoose.Schema({
+  username: { type: String, unique: true, required: true },
+  password: { type: String, required: true }
+});
+
+const User = mongoose.model('User', userSchema);
 
 async function registerUser(username, password) {
-  const existing = users.find(u => u.username === username);
+  const existing = await User.findOne({ username });
   if (existing) throw new Error('User already exists');
   const hash = await bcrypt.hash(password, 10);
-  const user = { username, password: hash };
-  users.push(user);
+  const user = new User({ username, password: hash });
+  await user.save();
   return { username };
 }
 
 async function authenticateUser(username, password) {
-  const user = users.find(u => u.username === username);
+  const user = await User.findOne({ username });
   if (!user) return null;
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) return null;
   return { username };
 }
 
-module.exports = { registerUser, authenticateUser }; 
+module.exports = { registerUser, authenticateUser, User }; 

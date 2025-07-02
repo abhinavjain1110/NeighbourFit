@@ -1,14 +1,22 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+
 const app = express();
+const MONGO_URI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
 app.use(cors());
 app.use(express.json());
 
 const { getAllNeighborhoods, matchNeighborhoods } = require('./neighborhoods');
 const { registerUser, authenticateUser } = require('./users');
 
-const JWT_SECRET = 'neighborfit_secret'; // Use env var in production
+
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.get('/', (req, res) => res.send('NeighborFit API'));
 

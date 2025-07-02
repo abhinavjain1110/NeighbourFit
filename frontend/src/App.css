@@ -1,20 +1,24 @@
 body {
-  background: #f7f7f7;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  min-height: 100vh;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .App {
   max-width: 700px;
   margin: 40px auto;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   padding: 32px 24px;
 }
 
-h1 {
-  color: #2d6a4f;
-  margin-bottom: 0.5em;
+h1, h2, h3, h4, h5 {
+  color: #5f2c82;
+  background: linear-gradient(90deg, #49a09d 0%, #5f2c82 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .prefs-form {
@@ -37,19 +41,21 @@ label {
 
 input[type="range"] {
   flex: 1;
+  accent-color: #49a09d;
 }
 
-button[type="submit"] {
-  background: #40916c;
+button[type="submit"], .MuiButton-containedPrimary {
+  background: linear-gradient(90deg, #49a09d 0%, #5f2c82 100%);
   color: #fff;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(95,44,130,0.08);
 }
-button[disabled] {
+button[disabled], .MuiButton-containedPrimary:disabled {
   background: #b7e4c7;
   cursor: not-allowed;
 }
@@ -60,21 +66,26 @@ button[disabled] {
 }
 
 .result-item {
-  background: #e9f5ec;
-  border-radius: 7px;
+  background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+  border-radius: 12px;
   margin-bottom: 18px;
   padding: 16px 18px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: 0 1px 6px rgba(95,44,130,0.06);
 }
 
-.result-item h3 {
+.result-item h3, .result-item .MuiTypography-h6 {
   margin: 0 0 6px 0;
-  color: #1b4332;
+  color: #5f2c82;
 }
 
 .result-item ul {
   margin: 0;
   padding-left: 18px;
+}
+
+.MuiAppBar-root {
+  background: linear-gradient(90deg, #49a09d 0%, #5f2c82 100%);
+  box-shadow: 0 2px 8px rgba(95,44,130,0.08);
 }
 
 .App-logo {
