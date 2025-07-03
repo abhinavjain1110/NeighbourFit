@@ -28,7 +28,7 @@ const defaultMinScore = 0;
 function Preferences({ token }) {
   const [preferences, setPreferences] = useState(defaultPrefs);
   const [activeStep, setActiveStep] = useState(0);
-  const [minScore, setMinScore] = useState(defaultMinScore);
+  //const [minScore, setMinScore] = useState(defaultMinScore);
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -43,7 +43,7 @@ function Preferences({ token }) {
       navigate('/results', { state: { preferences, minScore } });
     }
   };
-
+  
   const handleBack = () => {
     if (activeStep > 0) setActiveStep((prev) => prev - 1);
   };

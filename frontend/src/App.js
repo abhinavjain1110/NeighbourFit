@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Box, Container, ThemeProvider, createTheme, CssBaseline, Link } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, ThemeProvider, createTheme, CssBaseline, Link } from '@mui/material';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Preferences from './pages/Preferences';
