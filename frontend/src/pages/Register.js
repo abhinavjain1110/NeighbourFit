@@ -19,7 +19,8 @@ export default function Register() {
     setError('');
     setSuccess('');
     try {
-      await axios.post('http://localhost:3001/api/register', form);
+      /* await axios.post('http://localhost:3001/api/register', form); */
+      await axios.post('https://neighbour-fit-one.vercel.app/api/register', form);
       setSuccess('Registration successful! You can now log in.');
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed');

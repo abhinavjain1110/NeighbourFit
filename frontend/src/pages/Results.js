@@ -38,7 +38,8 @@ function Results({ token }) {
       setLoading(true);
       setError('');
       try {
-        const res = await axios.post('http://localhost:3001/api/match', preferences, {
+        /* const res = await axios.post('http://localhost:3001/api/match', preferences, { */
+        const res = await axios.post('https://neighbour-fit-one.vercel.app/api/match', preferences, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (isMounted) {

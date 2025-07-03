@@ -17,7 +17,8 @@ export default function Login({ onLogin }) {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:3001/api/login', form);
+      /* const res = await axios.post('http://localhost:3001/api/login', form); */
+      const res = await axios.post('https://neighbour-fit-one.vercel.app/api/login', form);
       onLogin(res.data.token);
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
